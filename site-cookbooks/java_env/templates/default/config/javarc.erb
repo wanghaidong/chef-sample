@@ -1,0 +1,11 @@
+#! /bin/bash
+# this file was created by <%= @author %>
+# do not modify it by hand
+
+export JAVA_HOME=<%= node["myjava"]["home"] %>/jdk7
+
+export ANT_HOME=<%= node['myjava']['root'] %>/ant
+export M2_HOME=<%= node['myjava']['root'] %>/maven
+
+export PATH=$JAVA_HOME/bin:$PATH:$ANT_HOME/bin:$M2_HOME/bin
+

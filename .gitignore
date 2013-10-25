@@ -1,0 +1,4 @@
+cookbooks/*
+.DS_Store
+*.lock
+jdk-*.tar.gz
