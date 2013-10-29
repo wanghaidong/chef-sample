@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+    Created by <%= @author %>
+    Do not modify this file by hand.
+-->
+
+   <configuration>
+
+       <property>
+           <name>dfs.namenode.name.dir</name>
+           <value><%= @hadoop_name_dir %></value>
+           <description></description>
+       </property>
+
+       <property>
+           <name>dfs.datanode.data.dir</name>
+           <value><%= @hadoop_data_dir %></value>
+           <description></description>
+       </property>
+
+       <property>
+           <name>dfs.replication</name>
+           <value><%= @hdfs_rep_num %></value>
+       </property>
+
+   </configuration>
+
