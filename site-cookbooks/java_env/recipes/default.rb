@@ -101,6 +101,7 @@ remote_file "#{node['myjava']['download']}/hadoop-2.2.0.tar.gz" do
     mode 00644
     owner "wang"
     group "wang"
+    not_if { File.exists?("#{node['myjava']['download']}/hadoop-2.2.0.tar.gz")}
 end
 
 
@@ -116,6 +117,7 @@ bash "unzip_hadoop_dist" do
             sudo chown -R wang:wang #{node["myjava"]["home"]}/hadoop-2.2.0 #{node["myjava"]["home"]}/hadoop
         fi
     EOH
+    only_if do File.exists?("#{node['myjava']['download']}/hadoop-2.2.0.tar.gz") end
 end
 
 %W(#{node['myjava']['home']}/hadoop/tmp #{node['myjava']['home']}/hadoop/dfs #{node['myjava']['home']}/hadoop/dfs/name #{node['myjava']['home']}/hadoop/dfs/data).each do |hadoop_dir|
@@ -166,7 +168,7 @@ bash "add_hadoop_path" do
     code <<-EOH
         if [ -e #{node["myjava"]["home"]}/hadoop ] && [ -e #{node['myjava']['rcfile_path']} ]; then
             if ! grep 'hadoop' #{node['myjava']['rcfile_path']} > /dev/null 2>&1; then
-                echo "export PATH=$PATH:#{node['myjava']['home']}/hadoop/sbin:#{node['myjava']['home']}/hadoop/bin" >> #{node['myjava']['rcfile_path']}
+                echo 'export PATH=$PATH:'"#{node['myjava']['home']}/hadoop/sbin:#{node['myjava']['home']}/hadoop/bin" >> #{node['myjava']['rcfile_path']}
             fi
         fi
     EOH
